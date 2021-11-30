@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public Action<EnemyController> Died;
+    public float mapLimit;
     [SerializeField] LayerMask obstacleLayers;
     [SerializeField] LayerMask hittableLayers;
     [SerializeField] float speed;
@@ -19,11 +22,22 @@ public class EnemyController : MonoBehaviour
         if (movement.z == 0) return;
         if (MovementBlocked(movement)) return;
         HitObjects(movement);
-        transform.Translate(movement);
+        transform.position += movement;
+
+        //whole enemy is beyond right limit
+        if (transform.localPosition.x - transform.localScale.z / 2 > mapLimit) 
+        {
+            Died.Invoke(this);
+        }
+        //whole enemy is beyond left limit
+        else if (transform.localPosition.x + transform.localScale.z / 2 < -mapLimit) 
+        {
+            Died.Invoke(this);
+        }
     }
     Vector3 GetMovement()
     {
-        return new Vector3(0, 0, speed * Time.deltaTime);
+        return transform.forward * speed * Time.deltaTime;
     }
     bool MovementBlocked(Vector3 direction)
     {

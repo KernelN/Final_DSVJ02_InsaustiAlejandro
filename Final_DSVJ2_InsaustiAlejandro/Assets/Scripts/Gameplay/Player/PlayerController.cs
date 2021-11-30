@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IHittable
 {
+    public float mapLimit;
 	[SerializeField] LayerMask collisionLayers;
 	[SerializeField] float speed;
 
-    //#region Unity Events
+    //Unity Events
     private void Update()
     {
         Move();
     }
-    //#endregion
-
+    
     //Methods
     void Move()
     {
@@ -28,8 +28,20 @@ public class PlayerController : MonoBehaviour
     }
     bool MovementBlocked(Vector3 direction)
     {
+        //Set Variables
         Vector3 pos = transform.position + direction;
         float radius = transform.localScale.x / 2;
+
+        //Check for map limits and obstacles
+        if (pos.x + radius > mapLimit) return true;
+        if (pos.x - radius < -mapLimit) return true;
         return Physics.OverlapSphere(pos, radius, collisionLayers).Length > 0;
+    }
+
+    //Interface Implementations
+    public void GetHitted()
+    {
+        Debug.Log("Player died");
+        GetComponent<SphereCollider>().enabled = false;
     }
 }
