@@ -31,9 +31,11 @@ public class EnemyManager : MonoBehaviour
     //Unity Events
     private void Start()
     {
+        //Generate lists
         enabledEnemies = new List<EnemyController>();
         disabledEnemies = new List<EnemyController>();
 
+        //Generate Enemies
         GameObject enemy;
         for (int i = 0; i < maxEnemies; i++)
         {
@@ -45,6 +47,25 @@ public class EnemyManager : MonoBehaviour
             disabledEnemies.Add(enemy.GetComponent<EnemyController>());
             disabledEnemies[i].mapLimit = mapLimit;
             disabledEnemies[i].Died = OnEnemyDeath;
+        }
+
+        Vector3 spawnPos;
+        foreach (var spawnPoint in spawnPoints)
+        {
+            spawnPos = spawnPoint.transform.position; //get position
+
+            //Generate new position
+            if (spawnPos.x < 0)
+            {
+                spawnPos.x = -mapLimit;
+            }
+            else
+            {
+                spawnPos.x = mapLimit;
+            }
+
+            //Set position
+            spawnPoint.transform.position = spawnPos;
         }
     }
     private void Update()

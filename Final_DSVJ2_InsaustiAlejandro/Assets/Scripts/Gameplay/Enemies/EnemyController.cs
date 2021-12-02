@@ -25,12 +25,12 @@ public class EnemyController : MonoBehaviour
         transform.position += movement;
 
         //whole enemy is beyond right limit
-        if (transform.localPosition.x - transform.localScale.z / 2 > mapLimit) 
+        if (transform.localPosition.x - transform.localScale.z> mapLimit) 
         {
             Died.Invoke(this);
         }
         //whole enemy is beyond left limit
-        else if (transform.localPosition.x + transform.localScale.z / 2 < -mapLimit) 
+        else if (transform.localPosition.x + transform.localScale.z < -mapLimit) 
         {
             Died.Invoke(this);
         }

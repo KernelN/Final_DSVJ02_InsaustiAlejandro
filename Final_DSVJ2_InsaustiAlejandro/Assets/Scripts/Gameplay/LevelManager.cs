@@ -4,17 +4,25 @@ public class LevelManager : MonoBehaviour
 {
 	[SerializeField] PlayerController player;
 	[SerializeField] EnemyManager enemyManager;
-	[SerializeField] float mapLength;
-	[SerializeField] int spawnArea;
+	[SerializeField] float mapLimitEnemyMod;
+	[SerializeField] float mapLimit;
+	[SerializeField] int spawnAreas;
 
     //Unity Events
     private void Awake()
     {
-        enemyManager.mapLimit = mapLength * 2;
-        player.mapLimit = mapLength*2;
+        //Set map limits
+        enemyManager.mapLimit = mapLimit * mapLimitEnemyMod;
+        player.mapLimit = mapLimit;
+
+        //Select first spawn area
+        OnEnemySpawned();
     }
-    private void Update()
+
+    //Event Receivers
+    private void OnEnemySpawned()
     {
-        enemyManager.publicSpawnArea = spawnArea - 1;
+        //Send a random area (OPTIMICE LATER, USE PLAYER POSITION TO SELECT AREAS)
+        enemyManager.publicSpawnArea = Random.Range(0, spawnAreas);
     }
 }

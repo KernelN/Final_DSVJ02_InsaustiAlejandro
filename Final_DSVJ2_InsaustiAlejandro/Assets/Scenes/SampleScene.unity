@@ -592,8 +592,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 780169066}
   enemyManager: {fileID: 854919624}
-  mapLength: 5
-  spawnArea: 1
+  mapLimitEnemyMod: 2.75
+  mapLimit: 5
+  spawnAreas: 2
 --- !u!4 &1631440627
 Transform:
   m_ObjectHideFlags: 0
