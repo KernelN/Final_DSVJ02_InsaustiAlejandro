@@ -11,6 +11,9 @@ public class LevelManager : MonoBehaviour
     //Unity Events
     private void Awake()
     {
+        //Link Actions
+        enemyManager.EnemySpawned += OnEnemySpawned;
+
         //Set map limits
         enemyManager.mapLimit = mapLimit * mapLimitEnemyMod;
         player.mapLimit = mapLimit;

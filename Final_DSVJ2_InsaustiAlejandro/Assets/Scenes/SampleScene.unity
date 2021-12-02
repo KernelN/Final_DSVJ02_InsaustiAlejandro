@@ -388,7 +388,7 @@ MonoBehaviour:
   enemyEmpty: {fileID: 1282251962}
   spawnCooldown: 2
   spawnChance: 70
-  maxEnemies: 3
+  maxEnemies: 10
 --- !u!4 &854919625
 Transform:
   m_ObjectHideFlags: 0

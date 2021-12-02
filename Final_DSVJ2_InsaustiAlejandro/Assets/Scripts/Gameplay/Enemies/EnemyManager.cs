@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour
 {
+    public Action EnemySpawned;
 	public float mapLimit;
     public int publicSpawnArea 
     {
@@ -99,6 +102,9 @@ public class EnemyManager : MonoBehaviour
 
         //Activate
         enemy.gameObject.SetActive(true);
+
+        //Call action
+        EnemySpawned.Invoke();
     }
 
     //Event Receivers
