@@ -4,17 +4,17 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
 	public float mapLimit;
-    public int spawnArea 
+    public int publicSpawnArea 
     {
         private get { return spawnArea; }
         set
         {
-            if (value > spawnPoints.Length) 
+            spawnArea = value;
+
+            if (spawnArea > spawnPoints.Length)
                 spawnArea = spawnPoints.Length - 1;
-            else if (value < 0) 
+            else if (spawnArea < 0)
                 spawnArea = 0;
-            else
-                spawnArea = value;
         }
     }
     [SerializeField] Transform[] spawnPoints;
@@ -26,6 +26,7 @@ public class EnemyManager : MonoBehaviour
     List<EnemyController> enabledEnemies;
     List<EnemyController> disabledEnemies;
     float spawnTimer;
+    int spawnArea;
 
     //Unity Events
     private void Start()

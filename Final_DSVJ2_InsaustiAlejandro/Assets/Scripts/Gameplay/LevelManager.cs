@@ -15,6 +15,6 @@ public class LevelManager : MonoBehaviour
     }
     private void Update()
     {
-        enemyManager.spawnArea = spawnArea - 1;
+        enemyManager.publicSpawnArea = spawnArea - 1;
     }
 }
