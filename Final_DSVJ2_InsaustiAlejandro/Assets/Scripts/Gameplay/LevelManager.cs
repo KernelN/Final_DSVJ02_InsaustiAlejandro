@@ -105,6 +105,7 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("Player Won");
         gameOver = true;
+        gameManager.score += (int)(gameManager.score * (1 - timer / maxPlayTime));
         PlayerWon.Invoke();
     }
     void OnScoreChanged(int value)
