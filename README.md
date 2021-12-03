@@ -23,3 +23,4 @@ This is a game being developed by students from <a href="https://www.imagecampus
 - **MSavioti** - *Pixel Clock* - https://opengameart.org/content/simple-clock-16x16
 - **farvardin** - *Pixel Frog Face* - https://opengameart.org/content/frog-smilies
 - **Cameron 'cron' Fraser** - *Pixel Gold Skull* - https://opengameart.org/content/gold-skull
+- **ShyFonts** - *Totally not star wars font* - https://www.fontsquirrel.com/fonts/Distant-Galaxy
