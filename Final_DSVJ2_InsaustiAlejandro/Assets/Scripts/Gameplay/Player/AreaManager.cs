@@ -39,6 +39,6 @@ public class AreaManager : MonoBehaviour
     //Methods
     public float GetHighestAreaPosition()
     {
-        return areas[highestArea];
+        return areas[highestArea - 1];
     }
 }

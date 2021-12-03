@@ -1,7 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
+    public Action PlayerDied;
+    public Action PlayerWon;
+    public Action PlayerLost;
+    public float publicPlayerSpawnTimer { get { return playerSpawnTimer; } }
+    public int publicPlayerLives { get { return playerLives; } }
     [SerializeField] AreaManager playerAreaManager;
 	[SerializeField] PlayerController player;
 	[SerializeField] EnemyManager enemyManager;
@@ -9,6 +16,7 @@ public class LevelManager : MonoBehaviour
 	[SerializeField] float mapLimitEnemyMod;
 	[SerializeField] float mapLimit;
 	[SerializeField] float playerSpawnTimer;
+	[SerializeField] float maxPlayTime;
 	[SerializeField] int playerLives;
 	[SerializeField] int spawnAreas;
 
@@ -49,6 +57,7 @@ public class LevelManager : MonoBehaviour
         {
             //Respawn player
             playerLives--;
+            //PlayerDied.Invoke();
             Invoke("RespawnPlayer", playerSpawnTimer);
 
             //Set new player position
@@ -59,9 +68,15 @@ public class LevelManager : MonoBehaviour
             //Set camera
             cameraController.GoToMinDistance();
         }
+        else
+        {
+            Debug.Log("Player Lost");
+            PlayerLost.Invoke();
+        }
     }
     void OnPlayerWon()
     {
         Debug.Log("Player Won");
+        PlayerWon.Invoke();
     }
 }
