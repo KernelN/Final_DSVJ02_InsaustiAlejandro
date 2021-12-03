@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55fc6585da76c244db831422e915b173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followRange: {x: 2, y: 4}
+  followRange: {x: 3, y: 4}
   player: {fileID: 5175755973830980704}
 --- !u!1 &1282251961
 GameObject:
@@ -653,6 +653,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5175755974342695729, guid: 140023047cb972a4fb9f154e9820693b,
         type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175755974342695729, guid: 140023047cb972a4fb9f154e9820693b,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -700,6 +705,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175755974342695733, guid: 140023047cb972a4fb9f154e9820693b,
+        type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175755974342695733, guid: 140023047cb972a4fb9f154e9820693b,
+        type: 3}
+      propertyPath: rotateSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5175755974342695734, guid: 140023047cb972a4fb9f154e9820693b,
         type: 3}

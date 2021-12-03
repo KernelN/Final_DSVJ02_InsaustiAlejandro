@@ -1,12 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IHittable
 {
     public float mapLimit;
 	[SerializeField] LayerMask collisionLayers;
+	[SerializeField] float rotateSpeed;
 	[SerializeField] float speed;
+    Quaternion direction;
+    float rotationTimer;
+
 
     //Unity Events
+    void Start()
+    {
+        direction = transform.localRotation;
+    }
     private void Update()
     {
         Move();
@@ -15,16 +24,29 @@ public class PlayerController : MonoBehaviour, IHittable
     //Methods
     void Move()
     {
+        //Get original movement
         Vector3 movement = GetMovement();
-        if (movement.x == 0 && movement.z == 0) return;
-        if (MovementBlocked(movement)) return;
-        transform.Translate(movement);
+        if (movement.x == 0 && movement.z == 0) return; //if movement is null, return
+
+        //If moving in new direction, rotate
+        Quaternion newDirection = Quaternion.LookRotation(movement.normalized, transform.up);
+        if (newDirection != direction)
+        {
+            direction = newDirection;
+            rotationTimer = 0;
+            StopAllCoroutines();
+        }
+        StartCoroutine(Turn());
+
+        //If movement is posible, move
+        if (MovementBlocked(movement)) return; 
+        transform.localPosition += movement;
     }
     Vector3 GetMovement()
     {
-        float horizontalMove = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        float verticalMove = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        return new Vector3(horizontalMove, 0, verticalMove);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        return new Vector3(horizontalInput, 0, verticalInput) * speed * Time.deltaTime;
     }
     bool MovementBlocked(Vector3 direction)
     {
@@ -36,6 +58,27 @@ public class PlayerController : MonoBehaviour, IHittable
         if (pos.x + radius > mapLimit) return true;
         if (pos.x - radius < -mapLimit) return true;
         return Physics.OverlapSphere(pos, radius, collisionLayers).Length > 0;
+    }
+    IEnumerator Turn()
+    {
+        //Return if already in a loop or if direction is null
+        if (rotationTimer > 0) yield break;
+        
+        //Set Rotation
+        Quaternion originalRotation = transform.localRotation;
+
+        //Set Timer
+        float timerMax = Quaternion.Angle(originalRotation, direction);
+        rotationTimer = timerMax;
+
+        //Rotate in direction
+        do
+        {
+            rotationTimer -= Time.deltaTime * rotateSpeed;
+            transform.localRotation = Quaternion.Lerp(originalRotation, direction, timerMax - rotationTimer);
+            yield return null;
+        } while (rotationTimer > 0);
+        yield break;
     }
 
     //Interface Implementations
