@@ -34,6 +34,10 @@ public class FrogController : MonoBehaviour, IHittable
     {
         Debug.Log("Player re-spawned");
         alive = true;
+
+        direction = Vector3.zero;
+        movementTimer = 0;
+        rotationTimer = 0;
     }
     void GetDirection()
     {
