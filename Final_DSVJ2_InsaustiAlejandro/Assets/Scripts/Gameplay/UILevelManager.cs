@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using System.Collections;
+using System;
 
 public class UILevelManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class UILevelManager : MonoBehaviour
     [SerializeField] GameObject HUD;
     [SerializeField] TextMeshProUGUI spawnTimerText;
     [SerializeField] TextMeshProUGUI livesText;
+    [SerializeField] TextMeshProUGUI timerText;
 
     //Unity Events
     private void Start()
@@ -24,7 +26,8 @@ public class UILevelManager : MonoBehaviour
     }
     private void LateUpdate()
     {
-        
+        int minutes = levelManager.publicGameTimer / 60;
+        timerText.text = minutes.ToString("D2") + ":" + (levelManager.publicGameTimer % 60).ToString("D2");
     }
 
     //Methods
@@ -63,10 +66,12 @@ public class UILevelManager : MonoBehaviour
     }
     void OnPlayerWon()
     {
+        HUD.SetActive(false);
         victoryPanel.SetActive(true);
     }
     void OnPlayerLost()
     {
+        HUD.SetActive(false);
         defeatPanel.SetActive(true);
     }
 }

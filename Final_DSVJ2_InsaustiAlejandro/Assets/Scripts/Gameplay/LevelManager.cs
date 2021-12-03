@@ -9,16 +9,23 @@ public class LevelManager : MonoBehaviour
     public Action PlayerLost;
     public float publicPlayerSpawnTimer { get { return playerSpawnTimer; } }
     public int publicPlayerLives { get { return playerLives; } }
+    public int publicGameTimer { get { return (int)timer; } }
     [SerializeField] AreaManager playerAreaManager;
-	[SerializeField] PlayerController player;
-	[SerializeField] EnemyManager enemyManager;
-	[SerializeField] CameraController cameraController;
-	[SerializeField] float mapLimitEnemyMod;
-	[SerializeField] float mapLimit;
-	[SerializeField] float playerSpawnTimer;
-	[SerializeField] float maxPlayTime;
-	[SerializeField] int playerLives;
-	[SerializeField] int spawnAreas;
+    [SerializeField] PlayerController player;
+    [SerializeField] EnemyManager enemyManager;
+    [SerializeField] CameraController cameraController;
+    [Header("Map")]
+    [SerializeField] float mapLimitEnemyMod;
+    [SerializeField] float mapLimit;
+    [Header("Player")]
+    [Tooltip("In minutes")]
+    [SerializeField] float maxPlayTime;
+    [SerializeField] float playerSpawnTimer;
+    [SerializeField] int playerLives;
+    [Header("Enemies")]
+    [SerializeField] int spawnAreas;
+    bool gameOver;
+    float timer;
 
     //Unity Events
     private void Awake()
@@ -34,6 +41,26 @@ public class LevelManager : MonoBehaviour
 
         //Select first spawn area
         OnEnemySpawned();
+
+        //Set Game Timer
+        timer = maxPlayTime * 60;
+    }
+    private void Update()
+    {
+        if (gameOver) return;
+
+        //if timer less than 0, set it as 0
+        if (timer <= 0)
+        {
+            timer = 0;
+            gameOver = true;
+            PlayerLost.Invoke();
+
+            return;
+        }
+
+        //reduce timer
+        timer -= Time.deltaTime;
     }
 
     //Methods
@@ -71,12 +98,14 @@ public class LevelManager : MonoBehaviour
         else
         {
             Debug.Log("Player Lost");
+            gameOver = true;
             PlayerLost.Invoke();
         }
     }
     void OnPlayerWon()
     {
         Debug.Log("Player Won");
+        gameOver = true;
         PlayerWon.Invoke();
     }
 }
