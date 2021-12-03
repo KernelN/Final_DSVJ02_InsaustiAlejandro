@@ -2,6 +2,17 @@
 
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
+    public int playerLives 
+    {
+        get { return playerData.playerLives; }
+        set { if (value < 0) value = 0; playerData.playerLives = value; }
+    }
+    public int score
+    {
+        get { return playerData.playerLives; }
+        set { if (value < 0) value = 0; playerData.playerLives = value; }
+    }
+    [SerializeField] PlayerData playerData;
     SceneLoader.Scenes currentScene;
 
     //Unity Events

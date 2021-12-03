@@ -4,17 +4,16 @@ using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
-    public Action<int> ScoreUpdated;
+    public Action ScoreUpdated;
     public Action PlayerDied;
     public Action PlayerWon;
     public Action PlayerLost;
-    public float publicPlayerSpawnTimer { get { return playerSpawnTimer; } }
-    public int publicPlayerLives { get { return playerLives; } }
-    public int publicGameTimer { get { return (int)timer; } }
+    public float playerRespawnTimer { get { return playerSpawnTimer; } }
+    public int playerLives { get { return gameManager.playerLives; } }
+    public int gameTimer { get { return (int)timer; } }
     [SerializeField] AreaManager playerAreaManager;
-    [SerializeField] PlayerController player;
+    [SerializeField] FrogController player;
     [SerializeField] EnemyManager enemyManager;
-    [SerializeField] CameraController cameraController;
     [SerializeField] PickablesManager pickablesManager;
     [Header("Map")]
     [SerializeField] float mapLimitEnemyMod;
@@ -23,10 +22,9 @@ public class LevelManager : MonoBehaviour
     [Tooltip("In minutes")]
     [SerializeField] float maxPlayTime;
     [SerializeField] float playerSpawnTimer;
-    [SerializeField] int playerLives;
-    [SerializeField] int score;
     [Header("Enemies")]
     [SerializeField] int spawnAreas;
+    GameManager gameManager;
     bool gameOver;
     float timer;
 
@@ -87,7 +85,7 @@ public class LevelManager : MonoBehaviour
         if (playerLives > 1)
         {
             //Respawn player
-            playerLives--;
+            gameManager.playerLives--;
             PlayerDied.Invoke();
             Invoke("RespawnPlayer", playerSpawnTimer);
 
@@ -95,9 +93,6 @@ public class LevelManager : MonoBehaviour
             Vector3 newSpawnPoint = player.transform.position;
             newSpawnPoint.z = playerAreaManager.GetHighestAreaPosition();
             player.transform.position = newSpawnPoint;
-
-            //Set camera
-            cameraController.GoToMinDistance();
         }
         else
         {
@@ -114,7 +109,7 @@ public class LevelManager : MonoBehaviour
     }
     void OnScoreChanged(int value)
     {
-        score += value;
-        ScoreUpdated.Invoke(score);
+        gameManager.score += value;
+        ScoreUpdated.Invoke();
     }
 }

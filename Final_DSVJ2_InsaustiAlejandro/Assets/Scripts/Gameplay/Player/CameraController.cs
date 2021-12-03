@@ -13,9 +13,12 @@ public class CameraController : MonoBehaviour
         if(!player)
             player = GameObject.FindGameObjectWithTag("Player").transform;
 
-        //first followup
+        //First followup
         if (!player) return;
         FollowPlayer();
+
+        //Link Actions
+        player.GetComponent<FrogController>().Died += OnPlayerDeath;
     }
     private void LateUpdate()
     {
@@ -24,7 +27,7 @@ public class CameraController : MonoBehaviour
     }
 
     //Methods
-    public void GoToMinDistance()
+    void GoToMinDistance()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, GetMinZAxis());
     }
@@ -55,5 +58,11 @@ public class CameraController : MonoBehaviour
     float GetMinZAxis()
     {
         return player.position.z - followRange.x;
+    }
+
+    //Event Receivers
+    void OnPlayerDeath()
+    {
+        GoToMinDistance();
     }
 }

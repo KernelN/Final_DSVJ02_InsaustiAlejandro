@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
 using System.Collections;
-using System;
 
 public class UILevelManager : MonoBehaviour
 {
@@ -13,10 +12,19 @@ public class UILevelManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] TextMeshProUGUI scoreText;
+    //this is ugly, clean later v
+    [SerializeField] TextMeshProUGUI defeatTimerText;
+    [SerializeField] TextMeshProUGUI defeatScoreText;
+    [SerializeField] TextMeshProUGUI victoryTimerText;
+    [SerializeField] TextMeshProUGUI victoryScoreText;
+    //this is ugly, clean later ^
+    GameManager gameManager;
 
     //Unity Events
     private void Start()
     {
+        gameManager = GameManager.Get();
+        
         //Link Actions
         levelManager.PlayerDied += OnPlayerDied;
         levelManager.PlayerWon += OnPlayerWon;
@@ -28,14 +36,22 @@ public class UILevelManager : MonoBehaviour
     }
     private void LateUpdate()
     {
-        int minutes = levelManager.publicGameTimer / 60;
-        timerText.text = minutes.ToString("D2") + ":" + (levelManager.publicGameTimer % 60).ToString("D2");
+        SetTimerText(timerText);
     }
 
     //Methods
+    void SetTimerText(TextMeshProUGUI text)
+    {
+        int minutes = levelManager.gameTimer / 60;
+        text.text = minutes.ToString("D2") + ":" + (levelManager.gameTimer % 60).ToString("D2");
+    }
+    void SetScoreText(TextMeshProUGUI text)
+    {
+        text.text = "Score: " + gameManager.score.ToString("D3");
+    }
     void FirstSet()
     {
-        livesText.text = levelManager.publicPlayerLives.ToString();
+        livesText.text = gameManager.playerLives.ToString();
     }
     IEnumerator SpawnCountdown()
     {
@@ -43,7 +59,7 @@ public class UILevelManager : MonoBehaviour
         HUD.SetActive(false);
         spawnTimerText.gameObject.SetActive(true);
 
-        float respawnTimer = levelManager.publicPlayerSpawnTimer;
+        float respawnTimer = levelManager.playerRespawnTimer;
 
         //Update Timer
         do
@@ -63,21 +79,25 @@ public class UILevelManager : MonoBehaviour
     //Event Receivers
     void OnPlayerDied()
     {
-        livesText.text = levelManager.publicPlayerLives.ToString();
+        livesText.text = gameManager.playerLives.ToString();
         StartCoroutine(SpawnCountdown());
     }
     void OnPlayerWon()
     {
         HUD.SetActive(false);
+        SetScoreText(victoryScoreText);
+        SetTimerText(victoryTimerText);
         victoryPanel.SetActive(true);
     }
     void OnPlayerLost()
     {
         HUD.SetActive(false);
+        SetScoreText(defeatScoreText);
+        SetTimerText(defeatTimerText);
         defeatPanel.SetActive(true);
     }
-    void OnScoreUpdated(int score)
+    void OnScoreUpdated()
     {
-        scoreText.text = "Score: " + score.ToString("D3");
+        SetScoreText(scoreText);
     }
 }

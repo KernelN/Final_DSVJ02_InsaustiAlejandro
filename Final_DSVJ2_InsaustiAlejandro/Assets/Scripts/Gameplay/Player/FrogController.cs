@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IHittable
+public class FrogController : MonoBehaviour, IHittable
 {
     public Action Died;
     public float mapLimit;
