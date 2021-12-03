@@ -53,11 +53,11 @@ public class LevelManager : MonoBehaviour
     {
         player.gameObject.SetActive(false);
 
-        if (playerLives > 0)
+        if (playerLives > 1)
         {
             //Respawn player
             playerLives--;
-            //PlayerDied.Invoke();
+            PlayerDied.Invoke();
             Invoke("RespawnPlayer", playerSpawnTimer);
 
             //Set new player position
