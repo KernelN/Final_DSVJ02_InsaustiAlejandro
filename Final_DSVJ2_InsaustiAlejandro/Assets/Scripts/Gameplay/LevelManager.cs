@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
     [Tooltip("In minutes")]
     [SerializeField] float maxPlayTime;
     [SerializeField] float playerSpawnTimer;
+    [SerializeField] int lifeScoreValue;
     [Header("Enemies")]
     [SerializeField] int spawnAreas;
     GameManager gameManager;
@@ -46,6 +47,10 @@ public class LevelManager : MonoBehaviour
 
         //Set Game Timer
         timer = maxPlayTime * 60;
+    }
+    private void Start()
+    {
+        gameManager = GameManager.Get();
     }
     private void Update()
     {
@@ -105,7 +110,8 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("Player Won");
         gameOver = true;
-        gameManager.score += (int)(gameManager.score * (1 - timer / maxPlayTime));
+        gameManager.score += (int)(gameManager.score * (timer / (maxPlayTime*60)));
+        gameManager.score += gameManager.playerLives * lifeScoreValue;
         PlayerWon.Invoke();
     }
     void OnScoreChanged(int value)

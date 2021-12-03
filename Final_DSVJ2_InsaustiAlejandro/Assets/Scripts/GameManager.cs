@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     }
     public int score
     {
-        get { return playerData.playerLives; }
-        set { if (value < 0) value = 0; playerData.playerLives = value; }
+        get { return playerData.score; }
+        set { if (value < 0) value = 0; playerData.score = value; }
     }
     [SerializeField] PlayerData playerData;
     SceneLoader.Scenes currentScene;
@@ -29,8 +29,14 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     }
 
     //Methods
+    public void SetPause(float newTime)
+    {
+        Time.timeScale = newTime;
+    }
     public void LoadMenu()
     {
+        if(Time.timeScale != 1) SetPause(1);
+
         currentScene = SceneLoader.Scenes.menu;
         SceneLoader.LoadScene(currentScene);
     }
