@@ -1,15 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IHittable
 {
+    public Action Died;
     public float mapLimit;
 	[SerializeField] LayerMask collisionLayers;
 	[SerializeField] float rotateSpeed;
 	[SerializeField] float speed;
     Quaternion direction;
     float rotationTimer;
-
+    bool alive = true;
 
     //Unity Events
     void Start()
@@ -18,10 +20,17 @@ public class PlayerController : MonoBehaviour, IHittable
     }
     private void Update()
     {
+        if (!alive) return;
+
         Move();
     }
-    
+
     //Methods
+    public void Respawn()
+    {
+        Debug.Log("Player re-spawned");
+        alive = true;
+    }
     void Move()
     {
         //Get original movement
@@ -85,6 +94,7 @@ public class PlayerController : MonoBehaviour, IHittable
     public void GetHitted()
     {
         Debug.Log("Player died");
-        GetComponent<SphereCollider>().enabled = false;
+        alive = false;
+        Died.Invoke();
     }
 }

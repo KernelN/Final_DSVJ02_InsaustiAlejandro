@@ -17,13 +17,17 @@ public class CameraController : MonoBehaviour
         if (!player) return;
         FollowPlayer();
     }
-    private void Update()
+    private void LateUpdate()
     {
         if (!player) return;
         FollowPlayer();
     }
 
     //Methods
+    public void GoToMinDistance()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y, GetMinZAxis());
+    }
     void FollowPlayer()
     {
         if (Mathf.Abs(player.position.z - transform.position.z) < followRange.x)
