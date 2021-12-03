@@ -1934,7 +1934,7 @@ MonoBehaviour:
   pickablesManager: {fileID: 1270974484}
   mapLimitEnemyMod: 2.75
   mapLimit: 5
-  maxPlayTime: 0.25
+  maxPlayTime: 1
   playerSpawnTimer: 2
   playerLives: 3
   score: 0
@@ -2621,6 +2621,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175755974342695733, guid: 140023047cb972a4fb9f154e9820693b,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5175755974342695734, guid: 140023047cb972a4fb9f154e9820693b,
         type: 3}
