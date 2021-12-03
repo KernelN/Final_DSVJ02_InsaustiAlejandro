@@ -4,6 +4,7 @@ using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
+    public Action<int> ScoreUpdated;
     public Action PlayerDied;
     public Action PlayerWon;
     public Action PlayerLost;
@@ -14,6 +15,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] PlayerController player;
     [SerializeField] EnemyManager enemyManager;
     [SerializeField] CameraController cameraController;
+    [SerializeField] PickablesManager pickablesManager;
     [Header("Map")]
     [SerializeField] float mapLimitEnemyMod;
     [SerializeField] float mapLimit;
@@ -22,6 +24,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] float maxPlayTime;
     [SerializeField] float playerSpawnTimer;
     [SerializeField] int playerLives;
+    [SerializeField] int score;
     [Header("Enemies")]
     [SerializeField] int spawnAreas;
     bool gameOver;
@@ -34,6 +37,7 @@ public class LevelManager : MonoBehaviour
         enemyManager.EnemySpawned += OnEnemySpawned;
         player.Died += OnPlayerDied;
         playerAreaManager.PlayerReachedLastArea += OnPlayerWon;
+        pickablesManager.ScoreChanged += OnScoreChanged;
 
         //Set map limits
         enemyManager.mapLimit = mapLimit * mapLimitEnemyMod;
@@ -107,5 +111,10 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Player Won");
         gameOver = true;
         PlayerWon.Invoke();
+    }
+    void OnScoreChanged(int value)
+    {
+        score += value;
+        ScoreUpdated.Invoke(score);
     }
 }

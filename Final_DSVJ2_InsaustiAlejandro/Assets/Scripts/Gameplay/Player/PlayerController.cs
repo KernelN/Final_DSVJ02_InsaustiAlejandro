@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour, IHittable
 {
     public Action Died;
     public float mapLimit;
-	[SerializeField] LayerMask collisionLayers;
+	[SerializeField] LayerMask obstacleLayers;
+	[SerializeField] LayerMask pickableLayers;
 	[SerializeField] float rotateSpeed;
 	[SerializeField] float speed;
     Quaternion direction;
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour, IHittable
         //If movement is posible, move
         if (MovementBlocked(movement)) return; 
         transform.localPosition += movement;
+        PickPickables();
     }
     Vector3 GetMovement()
     {
@@ -61,13 +63,31 @@ public class PlayerController : MonoBehaviour, IHittable
     {
         //Set Variables
         Vector3 pos = transform.position + direction;
-        float radius = transform.localScale.x / 2;
-
+        float radius = transform.localScale.z / 2;
+        
         //Check for map limits and obstacles
         if (pos.x + radius > mapLimit) return true;
         if (pos.x - radius < -mapLimit) return true;
-        return Physics.OverlapSphere(pos, radius, collisionLayers).Length > 0;
+        return Physics.OverlapSphere(pos, radius, obstacleLayers).Length > 0;
     }
+    void PickPickables()
+    {
+        //Set Variables
+        Vector3 pos = transform.position;
+        float radius = transform.localScale.z / 2;
+
+        //Pick Pickables
+        Collider[] pickables = Physics.OverlapSphere(pos, radius, pickableLayers);
+        if (pickables.Length < 1) return;
+        
+        //Hit Pickables
+        foreach (var pickable in pickables)
+        {
+            //If collider has IHittable, Hit
+            pickable.GetComponent<IHittable>()?.GetHitted();
+        }
+    }
+    
     IEnumerator Turn()
     {
         //Return if already in a loop or if direction is null

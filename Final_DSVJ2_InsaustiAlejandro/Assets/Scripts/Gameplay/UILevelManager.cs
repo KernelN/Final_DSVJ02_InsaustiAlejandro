@@ -12,6 +12,7 @@ public class UILevelManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI spawnTimerText;
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] TextMeshProUGUI scoreText;
 
     //Unity Events
     private void Start()
@@ -20,6 +21,7 @@ public class UILevelManager : MonoBehaviour
         levelManager.PlayerDied += OnPlayerDied;
         levelManager.PlayerWon += OnPlayerWon;
         levelManager.PlayerLost += OnPlayerLost;
+        levelManager.ScoreUpdated += OnScoreUpdated;
 
         //Set first values of evertything
         FirstSet();
@@ -73,5 +75,9 @@ public class UILevelManager : MonoBehaviour
     {
         HUD.SetActive(false);
         defeatPanel.SetActive(true);
+    }
+    void OnScoreUpdated(int score)
+    {
+        scoreText.text = "Score: " + score.ToString("D3");
     }
 }
