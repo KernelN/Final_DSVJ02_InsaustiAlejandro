@@ -5,7 +5,7 @@ public static class SceneLoader
 {
     public static AsyncOperation sceneLoading;
 
-    public enum Scenes { menu, credits, level1, level2, level3 }
+    public enum Scenes { menu, credits, level1, level2, level3, level4, level5 }
     public static Scenes GetCurrentScene()
     {
         Scene currentScene = SceneManager.GetActiveScene();
@@ -42,6 +42,12 @@ public static class SceneLoader
                 break;
             case Scenes.level3:
                 sceneName = "Level 3";
+                break;
+            case Scenes.level4:
+                sceneName = "Level 4";
+                break;
+            case Scenes.level5:
+                sceneName = "Level 5";
                 break;
             default:
                 break;

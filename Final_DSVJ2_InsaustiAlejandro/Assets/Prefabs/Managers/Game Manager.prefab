@@ -47,4 +47,4 @@ MonoBehaviour:
     playerLives: 3
     score: 0
     level: 0
-  maxLevel: 3
+  maxLevel: 5

@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1415229557363473299
 Transform:
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 222973123240534635}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 50}
+  m_LocalScale: {x: 1, y: 1, z: 70}
   m_Children: []
   m_Father: {fileID: 7796341626094899584}
   m_RootOrder: 0
@@ -104,6 +104,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Spawn Point
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716649126139872224, guid: 73d0cb1024060d74b99e05cc76f66f3d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4716649126139872225, guid: 73d0cb1024060d74b99e05cc76f66f3d,
         type: 3}

@@ -51,11 +51,11 @@ public class EnemyManager : MonoBehaviour
             //Generate new position
             if (spawnPos.x < 0)
             {
-                spawnPos.x = -mapLimit;
+                spawnPos.x = -mapLimit + enemyTemplate.transform.localScale.z / 2;
             }
             else
             {
-                spawnPos.x = mapLimit;
+                spawnPos.x = mapLimit - enemyTemplate.transform.localScale.z / 2;
             }
 
             //Set position

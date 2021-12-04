@@ -68,6 +68,20 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         currentScene = SceneLoader.Scenes.level3;
         SceneLoader.LoadScene(currentScene);
     }
+    public void LoadLevel4()
+    {
+        if (Time.timeScale != 1) SetPause(1);
+
+        currentScene = SceneLoader.Scenes.level4;
+        SceneLoader.LoadScene(currentScene);
+    }
+    public void LoadLevel5()
+    {
+        if (Time.timeScale != 1) SetPause(1);
+
+        currentScene = SceneLoader.Scenes.level5;
+        SceneLoader.LoadScene(currentScene);
+    }
     public void LoadLastLevel()
     {
         switch (level)
@@ -80,6 +94,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
                 break;
             case 3:
                 LoadLevel3();
+                break;
+            case 4:
+                LoadLevel4();
+                break;
+            case 5:
+                LoadLevel5();
                 break;
             default:
                 break;

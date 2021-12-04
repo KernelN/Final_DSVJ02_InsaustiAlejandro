@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 2196640244479713259}
   - component: {fileID: 9196649502578938635}
   m_Layer: 0
-  m_Name: Spawn Point 1
+  m_Name: Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4716649126139872225
 Transform:

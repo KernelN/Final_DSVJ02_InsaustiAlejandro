@@ -25,6 +25,14 @@ public class UIGameManager : MonoBehaviour
     {
         gameManager.LoadLevel3();
     }
+    public void LoadLevel4()
+    {
+        gameManager.LoadLevel4();
+    }
+    public void LoadLevel5()
+    {
+        gameManager.LoadLevel5();
+    }
     public void LoadLastLevel()
     {
         gameManager.LoadLastLevel();
