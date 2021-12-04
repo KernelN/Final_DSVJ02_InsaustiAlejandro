@@ -100,6 +100,7 @@ public class LevelManager : MonoBehaviourSingletonInScene<LevelManager>
             gameManager.level = 1;
             PlayerLost.Invoke();
             gameManager.score = 0;
+            gameManager.SetPause(0);
         }
     }
     void OnPlayerWon()
@@ -110,5 +111,6 @@ public class LevelManager : MonoBehaviourSingletonInScene<LevelManager>
         gameManager.score += gameManager.playerLives * lifeScoreValue;
         gameManager.level++;
         PlayerWon.Invoke();
+        gameManager.SetPause(0);
     }
 }

@@ -49,16 +49,22 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     }
     public void LoadLevel1()
     {
+        if (Time.timeScale != 1) SetPause(1);
+
         currentScene = SceneLoader.Scenes.level1;
         SceneLoader.LoadScene(currentScene);
     }
     public void LoadLevel2()
     {
+        if (Time.timeScale != 1) SetPause(1);
+
         currentScene = SceneLoader.Scenes.level2;
         SceneLoader.LoadScene(currentScene);
     }
     public void LoadLevel3()
     {
+        if (Time.timeScale != 1) SetPause(1);
+
         currentScene = SceneLoader.Scenes.level3;
         SceneLoader.LoadScene(currentScene);
     }
