@@ -5,8 +5,6 @@ public class PlatformController : MonoBehaviour
 {
     public Action<PlatformController> Died;
     public float mapLimit;
-    [SerializeField] LayerMask obstacleLayers;
-    [SerializeField] LayerMask hittableLayers;
     [SerializeField] float speed;
 
     //Unity Events

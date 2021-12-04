@@ -5,52 +5,40 @@ using Random = UnityEngine.Random;
 
 public class PlatformManager : MonoBehaviour
 {
-    public Action PlatformSpawned;
-    public float mapLimit;
-    public int publicSpawnArea
-    {
-        private get { return spawnArea; }
-        set
-        {
-            spawnArea = value;
-
-            if (spawnArea > spawnPoints.Length)
-                spawnArea = spawnPoints.Length - 1;
-            else if (spawnArea < 0)
-                spawnArea = 0;
-        }
-    }
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] GameObject platformTemplate;
+    [Tooltip("Unity length to the player needed to enable a spawnpoint")]
+    [SerializeField] float spawnMinDistance = 11;
     [SerializeField] float spawnCooldown;
     [SerializeField] float spawnChance;
+    [SerializeField] float mapLimitMod;
     [SerializeField] int maxPlatforms;
     List<PlatformController> enabledPlatforms;
     List<PlatformController> disabledPlatforms;
     LevelManager levelManager;
+    float mapLimit { get { return levelManager.mapLimits * mapLimitMod; } }
     float spawnTimer;
-    int spawnArea;
 
     //Unity Events
     private void Start()
     {
-        //Get LevelManger
-        //levelManager = LevelManager.Get();
+        //Get Level Manager
+        levelManager = LevelManager.Get();
 
         //Generate lists
         enabledPlatforms = new List<PlatformController>();
         disabledPlatforms = new List<PlatformController>();
 
         //Generate Enemies
-        GameObject enemy;
+        GameObject platform;
         for (int i = 0; i < maxPlatforms; i++)
         {
             //Set Gameobject
-            enemy = Instantiate(platformTemplate, transform);
-            enemy.name = platformTemplate.name + " " + (i + 1);
-            enemy.SetActive(false);
+            platform = Instantiate(platformTemplate, transform);
+            platform.name = platformTemplate.name + " " + (i + 1);
+            platform.SetActive(false);
 
-            disabledPlatforms.Add(enemy.GetComponent<PlatformController>());
+            disabledPlatforms.Add(platform.GetComponent<PlatformController>());
             disabledPlatforms[i].mapLimit = mapLimit;
             disabledPlatforms[i].Died = OnPlatformDeath;
         }
@@ -89,7 +77,7 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
-    //Methods
+    //Methods    
     void SpawnPlatform()
     {
         if (disabledPlatforms.Count < 1) return;
@@ -99,24 +87,50 @@ public class PlatformManager : MonoBehaviour
         enabledPlatforms.Add(platform);
         disabledPlatforms.Remove(platform);
 
+        //Get spawn areas
+        Vector2 spawnAreas = GetSpawnAreas();
+        int minSpawnArea = (int)spawnAreas.x;
+        int maxSpawnArea = (int)spawnAreas.y;
+        int spawnArea = Random.Range(minSpawnArea, maxSpawnArea);
+
         //Set Position and Rotation
         platform.transform.position = spawnPoints[spawnArea].position;
         platform.transform.rotation = spawnPoints[spawnArea].rotation;
 
         //Activate
         platform.gameObject.SetActive(true);
+    }
+    Vector2 GetSpawnAreas()
+    {
+        //Init min and max range
+        int minSpawn = 0;
+        int maxSpawn = spawnPoints.Length - 1;
 
-        //Call action
-        PlatformSpawned.Invoke();
+        for (int i = minSpawn; i < spawnPoints.Length; i++)
+        {
+            if (spawnPoints[i].position.z < levelManager.playerCurrentCheckpoint - spawnMinDistance)
+                break;
+            minSpawn = i;
+        }
+
+        for (int i = maxSpawn; i > -1; i--)
+        {
+            if (spawnPoints[i].position.z > levelManager.playerCurrentCheckpoint + spawnMinDistance)
+                break;
+            maxSpawn = i;
+        }
+
+        //Return range
+        return new Vector2(minSpawn, maxSpawn);
     }
 
     //Event Receivers
-    void OnPlatformDeath(PlatformController PlatformEnemy)
+    void OnPlatformDeath(PlatformController deadPlatform)
     {
         //Switch Pools
-        enabledPlatforms.Remove(PlatformEnemy);
-        disabledPlatforms.Add(PlatformEnemy);
+        enabledPlatforms.Remove(deadPlatform);
+        disabledPlatforms.Add(deadPlatform);
 
-        PlatformEnemy.gameObject.SetActive(false);
+        deadPlatform.gameObject.SetActive(false);
     }
 }

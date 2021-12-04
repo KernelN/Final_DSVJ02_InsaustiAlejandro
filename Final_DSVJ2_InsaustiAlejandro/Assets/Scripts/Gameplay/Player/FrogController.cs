@@ -9,10 +9,14 @@ public class FrogController : MonoBehaviour, IHittable
     [SerializeField] LayerMask obstacleLayers;
     [SerializeField] LayerMask pickableLayers;
     [SerializeField] LayerMask notWalkableLayers;
+    [SerializeField] LayerMask platformLayers;
     [SerializeField] float rotateSpeed;
     [SerializeField] float movementSpeed;
+    Transform platformTransform;
     Quaternion directionRotation;
     Vector3 direction;
+    IEnumerator rotationRoutine;
+    float platformDistance;
     float movementTimer;
     float rotationTimer;
     bool alive = true;
@@ -28,6 +32,15 @@ public class FrogController : MonoBehaviour, IHittable
 
         GetDirection();
         StartCoroutine(Move());
+    }
+    void LateUpdate()
+    {
+        if (platformTransform && movementTimer == 0)
+        {
+            Vector3 newPos = transform.position;
+            newPos.x = platformTransform.position.x + platformDistance;
+            transform.position = newPos;
+        }
     }
 
     //Methods
@@ -60,11 +73,12 @@ public class FrogController : MonoBehaviour, IHittable
         Quaternion newDirection = Quaternion.LookRotation(direction, transform.up);
         if (newDirection != directionRotation)
         {
+            StopCoroutine(rotationRoutine);
             directionRotation = newDirection;
             rotationTimer = 0;
-            StopCoroutine(Turn());
         }
-        StartCoroutine(Turn());
+        rotationRoutine = Turn();
+        StartCoroutine(rotationRoutine);
 
         //If movement is posible, move
         if (MovementBlocked(movement))
@@ -128,6 +142,17 @@ public class FrogController : MonoBehaviour, IHittable
     }
     bool IsAboveWater()
     {
+        RaycastHit platform;
+        if (Physics.Raycast(transform.position, -transform.up, out platform, 10, platformLayers))
+        {
+            platformTransform = platform.transform;
+            platformDistance = transform.position.x - platformTransform.position.x;
+            return false;
+        }
+        else
+        {
+            platformTransform = null;
+        }
         return Physics.Raycast(transform.position, -transform.up, 10, notWalkableLayers);
     }
     void PickPickables()

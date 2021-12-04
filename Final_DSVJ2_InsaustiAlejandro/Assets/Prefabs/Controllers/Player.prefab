@@ -697,6 +697,9 @@ MonoBehaviour:
   notWalkableLayers:
     serializedVersion: 2
     m_Bits: 16
+  platformLayers:
+    serializedVersion: 2
+    m_Bits: 2048
   rotateSpeed: 6
   movementSpeed: 4
 --- !u!1 &5190685810542473703

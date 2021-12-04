@@ -18,7 +18,6 @@ public class EnemyManager : MonoBehaviour
     LevelManager levelManager;
 	float mapLimit { get { return levelManager.mapLimits * mapLimitMod; } }
     float spawnTimer;
-    //int spawnArea;
 
     //Unity Events
     private void Start()
