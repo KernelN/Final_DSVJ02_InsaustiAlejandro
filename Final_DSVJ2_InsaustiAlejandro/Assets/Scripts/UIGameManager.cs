@@ -17,6 +17,18 @@ public class UIGameManager : MonoBehaviour
     {
         gameManager.LoadLevel1();
     }
+    public void LoadLevel2()
+    {
+        gameManager.LoadLevel2();
+    }
+    public void LoadLevel3()
+    {
+        gameManager.LoadLevel3();
+    }
+    public void LoadLastLevel()
+    {
+        gameManager.LoadLastLevel();
+    }
     public void LoadCredits()
     {
         gameManager.LoadCredits();

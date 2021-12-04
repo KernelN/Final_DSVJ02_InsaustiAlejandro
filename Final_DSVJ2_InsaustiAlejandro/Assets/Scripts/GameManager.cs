@@ -12,8 +12,14 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         get { return playerData.score; }
         set { if (value < 0) value = 0; playerData.score = value; }
     }
+    public int level //max values changes with max level
+    {
+        get { return playerData.level; }
+        set { if (value < 1) value = 1; if (value > maxLevel) value = 1; playerData.level = value; }
+    }
     public SceneLoader.Scenes targetScene { get { return currentScene; }  }
     [SerializeField] PlayerData playerData;
+    [SerializeField] int maxLevel;
     SceneLoader.Scenes currentScene;
 
     //Unity Events
@@ -45,6 +51,33 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         currentScene = SceneLoader.Scenes.level1;
         SceneLoader.LoadScene(currentScene);
+    }
+    public void LoadLevel2()
+    {
+        currentScene = SceneLoader.Scenes.level2;
+        SceneLoader.LoadScene(currentScene);
+    }
+    public void LoadLevel3()
+    {
+        currentScene = SceneLoader.Scenes.level3;
+        SceneLoader.LoadScene(currentScene);
+    }
+    public void LoadLastLevel()
+    {
+        switch (level)
+        {
+            case 1:
+                LoadLevel1();
+                break;
+            case 2:
+                LoadLevel2();
+                break;
+            case 3:
+                LoadLevel3();
+                break;
+            default:
+                break;
+        }
     }
     public void LoadCredits()
     {

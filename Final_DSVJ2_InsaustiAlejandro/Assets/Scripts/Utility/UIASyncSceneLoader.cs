@@ -40,6 +40,12 @@ public class UIASyncSceneLoader : MonoBehaviour
             case SceneLoader.Scenes.level1:
                 sceneName = "Level 1";
                 break;
+            case SceneLoader.Scenes.level2:
+                sceneName = "Level 2";
+                break;
+            case SceneLoader.Scenes.level3:
+                sceneName = "Level 3";
+                break;
             default:
                 break;
         }

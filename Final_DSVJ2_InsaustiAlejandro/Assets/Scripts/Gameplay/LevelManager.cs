@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] FrogController player;
     [SerializeField] EnemyManager enemyManager;
     [SerializeField] PickablesManager pickablesManager;
+    [SerializeField] int level;
     [Header("Map")]
     [SerializeField] float mapLimitEnemyMod;
     [SerializeField] float mapLimit;
@@ -51,6 +52,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.Get();
+        gameManager.level = level;
     }
     private void Update()
     {
@@ -103,7 +105,9 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("Player Lost");
             gameOver = true;
+            gameManager.level = 1;
             PlayerLost.Invoke();
+            gameManager.score = 0;
         }
     }
     void OnPlayerWon()
@@ -112,6 +116,7 @@ public class LevelManager : MonoBehaviour
         gameOver = true;
         gameManager.score += (int)(gameManager.score * (timer / (maxPlayTime*60)));
         gameManager.score += gameManager.playerLives * lifeScoreValue;
+        gameManager.level++;
         PlayerWon.Invoke();
     }
     void OnScoreChanged(int value)

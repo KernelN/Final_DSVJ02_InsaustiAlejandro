@@ -65,6 +65,8 @@ public class UILevelManager : MonoBehaviour
     void FirstSet()
     {
         livesText.text = gameManager.playerLives.ToString();
+        SetTimerText(timerText);
+        SetScoreText(scoreText);
     }
     IEnumerator SpawnCountdown()
     {

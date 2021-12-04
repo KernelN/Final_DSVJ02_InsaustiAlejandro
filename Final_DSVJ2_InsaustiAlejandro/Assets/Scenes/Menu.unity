@@ -204,7 +204,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 667678548}
-        m_MethodName: LoadLevel1
+        m_MethodName: LoadLastLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1150,6 +1150,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1068253212034257431, guid: e3bcd2d4133f7164fbb51ac3056bb38c,
+        type: 3}
+      propertyPath: playerData.level
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1297485294173054426, guid: e3bcd2d4133f7164fbb51ac3056bb38c,
         type: 3}
       propertyPath: m_Name
