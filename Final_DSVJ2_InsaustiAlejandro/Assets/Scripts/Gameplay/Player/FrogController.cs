@@ -8,6 +8,7 @@ public class FrogController : MonoBehaviour, IHittable
     public float mapLimit;
     [SerializeField] LayerMask obstacleLayers;
     [SerializeField] LayerMask pickableLayers;
+    [SerializeField] LayerMask notWalkableLayers;
     [SerializeField] float rotateSpeed;
     [SerializeField] float movementSpeed;
     Quaternion directionRotation;
@@ -51,7 +52,7 @@ public class FrogController : MonoBehaviour, IHittable
         if (movementTimer != 0) yield break; //if another coroutine in progress, return
 
         //Get positions
-        Vector3 movement = direction * transform.localScale.z;
+        Vector3 movement = direction;
         Vector3 originalPos = transform.position;
         Vector3 targetPos = transform.position + movement;
 
@@ -84,8 +85,18 @@ public class FrogController : MonoBehaviour, IHittable
             yield return null;
         } while (movementTimer > 0);
 
+        //Reset walking variables
         direction = Vector3.zero;
         movementTimer = 0;
+
+        //Check if player is still standing above floor
+        if (IsAboveWater())
+        {
+            Died.Invoke();
+            yield break;
+        }
+
+        //Pick up anything below player
         PickPickables();
         yield break;
     }
@@ -114,6 +125,10 @@ public class FrogController : MonoBehaviour, IHittable
         if (pos.x + radius > mapLimit) return true;
         if (pos.x - radius < -mapLimit) return true;
         return Physics.OverlapSphere(pos, radius, obstacleLayers).Length > 0;
+    }
+    bool IsAboveWater()
+    {
+        return Physics.Raycast(transform.position, -transform.up, 10, notWalkableLayers);
     }
     void PickPickables()
     {

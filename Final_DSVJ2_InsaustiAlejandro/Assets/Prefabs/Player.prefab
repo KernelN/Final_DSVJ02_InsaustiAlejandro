@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 479468181}
   - component: {fileID: 479468184}
   - component: {fileID: 479468183}
-  - component: {fileID: 479468182}
   m_Layer: 0
   m_Name: Frog Glasses
   m_TagString: Untagged
@@ -81,19 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &479468182
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479468180}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &761741753190963618
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,7 +91,6 @@ GameObject:
   - component: {fileID: 143669996268573952}
   - component: {fileID: 3238687817478944668}
   - component: {fileID: 5864731528575396153}
-  - component: {fileID: 1873969964471575114}
   m_Layer: 0
   m_Name: Foot
   m_TagString: Untagged
@@ -175,19 +160,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &1873969964471575114
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 761741753190963618}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2225700971308380040
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +171,6 @@ GameObject:
   - component: {fileID: 3572299982167304092}
   - component: {fileID: 2947913304185688754}
   - component: {fileID: 2865842791212715062}
-  - component: {fileID: 5795034182853949215}
   m_Layer: 0
   m_Name: Foot
   m_TagString: Untagged
@@ -269,19 +240,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &5795034182853949215
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2225700971308380040}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2586024168605855691
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,9 +251,8 @@ GameObject:
   - component: {fileID: 3843587228110809075}
   - component: {fileID: 8837304589712272603}
   - component: {fileID: 4985582911004070932}
-  - component: {fileID: 8185232137056124895}
   m_Layer: 0
-  m_Name: Frog Glasses (1)
+  m_Name: Frog Glasses Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,19 +319,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &8185232137056124895
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2586024168605855691}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3848662857994237687
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +330,6 @@ GameObject:
   - component: {fileID: 1149427766347142137}
   - component: {fileID: 5805596094018027976}
   - component: {fileID: 5657765997614769728}
-  - component: {fileID: 154914481352889643}
   m_Layer: 0
   m_Name: Frog Front Right Leg
   m_TagString: Untagged
@@ -456,19 +399,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &154914481352889643
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3848662857994237687}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4731490655344868625
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +410,6 @@ GameObject:
   - component: {fileID: 716786777570606696}
   - component: {fileID: 4963690331164061238}
   - component: {fileID: 2968503049541435195}
-  - component: {fileID: 7401165734689757563}
   m_Layer: 0
   m_Name: Frog Back Right Leg
   m_TagString: Untagged
@@ -550,19 +479,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &7401165734689757563
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4731490655344868625}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4849195604089718636
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,7 +490,6 @@ GameObject:
   - component: {fileID: 1340594385851770572}
   - component: {fileID: 2425384723086482928}
   - component: {fileID: 7538091456735121508}
-  - component: {fileID: 3441444232843016798}
   m_Layer: 0
   m_Name: Foot
   m_TagString: Untagged
@@ -644,19 +559,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &3441444232843016798
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4849195604089718636}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5175755974342695734
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,7 +575,7 @@ GameObject:
   - component: {fileID: 5175755974342695733}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -687,7 +589,7 @@ Transform:
   m_GameObject: {fileID: 5175755974342695734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.5, z: 0.9}
   m_Children:
   - {fileID: 479468181}
   - {fileID: 1149427766347142137}
@@ -792,8 +694,11 @@ MonoBehaviour:
   pickableLayers:
     serializedVersion: 2
     m_Bits: 1024
+  notWalkableLayers:
+    serializedVersion: 2
+    m_Bits: 16
   rotateSpeed: 5
-  speed: 5
+  movementSpeed: 4
 --- !u!1 &5190685810542473703
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +710,6 @@ GameObject:
   - component: {fileID: 5905260634447191300}
   - component: {fileID: 8570990032077952373}
   - component: {fileID: 2832274854036001193}
-  - component: {fileID: 2427709994347990046}
   m_Layer: 0
   m_Name: Frog Front Left Leg
   m_TagString: Untagged
@@ -875,19 +779,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &2427709994347990046
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5190685810542473703}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6416516457328949581
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,7 +790,6 @@ GameObject:
   - component: {fileID: 8849141126616128949}
   - component: {fileID: 8262291871066128871}
   - component: {fileID: 7822262199268755095}
-  - component: {fileID: 1225947955234847573}
   m_Layer: 0
   m_Name: Frog Back Left Leg
   m_TagString: Untagged
@@ -969,19 +859,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &1225947955234847573
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6416516457328949581}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8330948658382208389
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,7 +870,6 @@ GameObject:
   - component: {fileID: 4020059209176263438}
   - component: {fileID: 3041430387789208388}
   - component: {fileID: 3897946392213496065}
-  - component: {fileID: 7923515903037625978}
   m_Layer: 0
   m_Name: Foot
   m_TagString: Untagged
@@ -1062,16 +938,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &7923515903037625978
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8330948658382208389}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
