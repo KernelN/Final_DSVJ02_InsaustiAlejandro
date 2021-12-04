@@ -1,0 +1,49 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class UIASyncSceneLoader : MonoBehaviour
+{
+	[SerializeField] Slider loadProgressBar;
+	[SerializeField] TextMeshProUGUI sceneToLoadName;
+	GameManager gameManager;
+	ASyncSceneLoader sceneLoader;
+
+    //Unity Events
+    private void Start()
+    {
+        //Get variables
+        gameManager = GameManager.Get();
+        sceneLoader = ASyncSceneLoader.Get();
+
+        SetLoadName();
+    }
+    private void Update()
+    {
+        //Update load bar
+        loadProgressBar.value = sceneLoader.loadingProgress;
+    }
+
+    //Methods
+    void SetLoadName()
+    {
+        string sceneName = "ERROR";
+
+        switch (gameManager.targetScene)
+        {
+            case SceneLoader.Scenes.menu:
+                sceneName = "Main Menu";
+                break;
+            case SceneLoader.Scenes.credits:
+                sceneName = "Credits";
+                break;
+            case SceneLoader.Scenes.level1:
+                sceneName = "Level 1";
+                break;
+            default:
+                break;
+        }
+
+        sceneToLoadName.text = "Loading " + sceneName + "...";
+    }
+}

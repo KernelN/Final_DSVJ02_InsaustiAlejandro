@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         get { return playerData.score; }
         set { if (value < 0) value = 0; playerData.score = value; }
     }
+    public SceneLoader.Scenes targetScene { get { return currentScene; }  }
     [SerializeField] PlayerData playerData;
     SceneLoader.Scenes currentScene;
 

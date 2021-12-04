@@ -72,6 +72,9 @@ public class UISplashScreenGenerator : MonoBehaviour
 
         //Set timer
         float timer = 0;
+        
+        //Wait a little before load;
+        yield return new WaitForSeconds(splashPeakDuration);
 
         //Make every splash appear and dissapear
         for (int i = 0; i < splashes.Count; i++)

@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public static class SceneLoader
 {
+    public static AsyncOperation sceneLoading;
+
     public enum Scenes { menu, credits, level1 }
     public static Scenes GetCurrentScene()
     {
@@ -21,19 +23,27 @@ public static class SceneLoader
     }
     public static void LoadScene(Scenes sceneToLoad)
     {
+        SceneManager.LoadScene("Load Scene");
+
+        string sceneName = "Main Menu";
         switch (sceneToLoad)
         {
             case Scenes.menu:
-        SceneManager.LoadScene("Main Menu");
+                sceneName = "Main Menu";
                 break;
             case Scenes.credits:
-                //SceneManager.LoadScene("Credits");
+                //sceneName = "Credits";
                 break;
             case Scenes.level1:
-                SceneManager.LoadScene("Level 1");
+                sceneName = "Level 1";
                 break;
             default:
                 break;
         }
+
+        sceneLoading = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+     
+        //Prevent scene from activating before loading screen is over
+        sceneLoading.allowSceneActivation = false;
     }
 }
