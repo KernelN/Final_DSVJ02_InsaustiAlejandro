@@ -5,35 +5,27 @@ using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour
 {
-    public Action EnemySpawned;
-	public float mapLimit;
-    public int publicSpawnArea 
-    {
-        private get { return spawnArea; }
-        set
-        {
-            spawnArea = value;
-
-            if (spawnArea > spawnPoints.Length)
-                spawnArea = spawnPoints.Length - 1;
-            else if (spawnArea < 0)
-                spawnArea = 0;
-        }
-    }
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] GameObject enemyTemplate;
-    [SerializeField] Transform enemyEmpty;
+    [Tooltip("Unity length to the player needed to enable a spawnpoint")]
+    [SerializeField] float spawnMinDistance = 11;
     [SerializeField] float spawnCooldown;
     [SerializeField] float spawnChance;
+    [SerializeField] float mapLimitMod;
     [SerializeField] int maxEnemies;
     List<EnemyController> enabledEnemies;
     List<EnemyController> disabledEnemies;
+    LevelManager levelManager;
+	float mapLimit { get { return levelManager.mapLimits * mapLimitMod; } }
     float spawnTimer;
-    int spawnArea;
+    //int spawnArea;
 
     //Unity Events
     private void Start()
     {
+        //Get Level Manager
+        levelManager = LevelManager.Get();
+
         //Generate lists
         enabledEnemies = new List<EnemyController>();
         disabledEnemies = new List<EnemyController>();
@@ -43,7 +35,7 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < maxEnemies; i++)
         {
             //Set Gameobject
-            enemy = Instantiate(enemyTemplate, enemyEmpty);
+            enemy = Instantiate(enemyTemplate, transform);
             enemy.name = enemyTemplate.name + " " + (i + 1);
             enemy.SetActive(false);
 
@@ -86,7 +78,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    //Methods
+    //Methods    
     void SpawnEnemy()
     {
         if (disabledEnemies.Count < 1) return;
@@ -96,15 +88,41 @@ public class EnemyManager : MonoBehaviour
         enabledEnemies.Add(enemy);
         disabledEnemies.Remove(enemy);
 
+        //Get spawn areas
+        Vector2 spawnAreas = GetSpawnAreas();
+        int minSpawnArea = (int)spawnAreas.x;
+        int maxSpawnArea = (int)spawnAreas.y;
+        int spawnArea = Random.Range(minSpawnArea, maxSpawnArea);
+
         //Set Position and Rotation
         enemy.transform.position = spawnPoints[spawnArea].position;
         enemy.transform.rotation = spawnPoints[spawnArea].rotation;
 
         //Activate
         enemy.gameObject.SetActive(true);
+    }
+    Vector2 GetSpawnAreas()
+    {
+        //Init min and max range
+        int minSpawn = 0;
+        int maxSpawn = spawnPoints.Length - 1;
 
-        //Call action
-        EnemySpawned.Invoke();
+        for (int i = minSpawn; i < spawnPoints.Length; i++)
+        {
+            if (spawnPoints[i].position.z < levelManager.playerCurrentCheckpoint - spawnMinDistance)
+                break;
+            minSpawn = i;
+        }
+
+        for (int i = maxSpawn; i > -1; i--)
+        {
+            if (spawnPoints[i].position.z > levelManager.playerCurrentCheckpoint + spawnMinDistance)
+                break;
+            maxSpawn = i;
+        }
+
+        //Return range
+        return new Vector2(minSpawn, maxSpawn);
     }
 
     //Event Receivers

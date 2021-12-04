@@ -697,7 +697,7 @@ MonoBehaviour:
   notWalkableLayers:
     serializedVersion: 2
     m_Bits: 16
-  rotateSpeed: 5
+  rotateSpeed: 6
   movementSpeed: 4
 --- !u!1 &5190685810542473703
 GameObject:

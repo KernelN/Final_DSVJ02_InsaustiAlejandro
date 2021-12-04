@@ -2,55 +2,47 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : MonoBehaviourSingletonInScene<LevelManager>
 {
     public Action ScoreUpdated;
     public Action PlayerDied;
     public Action PlayerWon;
     public Action PlayerLost;
+    //Map
+    public float mapLimits { get { return mapLimit; } }
+    //Player
     public float playerRespawnTimer { get { return playerSpawnTimer; } }
-    public int playerLives { get { return gameManager.playerLives; } }
+    public float playerCurrentCheckpoint 
+    { get { return checkpointManager.GetCurrentCheckpointPosition(); } }
+    //Enemies
     public int gameTimer { get { return (int)timer; } }
-    [SerializeField] AreaManager playerAreaManager;
-    [SerializeField] FrogController player;
-    [SerializeField] EnemyManager enemyManager;
-    [SerializeField] PickablesManager pickablesManager;
-    [SerializeField] int level;
     [Header("Map")]
-    [SerializeField] float mapLimitEnemyMod;
+    [SerializeField] int level;
     [SerializeField] float mapLimit;
     [Header("Player")]
+    [SerializeField] FrogController player;
+    [SerializeField] CheckpointManager checkpointManager;
     [Tooltip("In minutes")]
     [SerializeField] float maxPlayTime;
     [SerializeField] float playerSpawnTimer;
     [SerializeField] int lifeScoreValue;
-    [Header("Enemies")]
-    [SerializeField] int spawnAreas;
     GameManager gameManager;
     bool gameOver;
     float timer;
 
     //Unity Events
-    private void Awake()
+    private void Start()
     {
         //Link Actions
-        enemyManager.EnemySpawned += OnEnemySpawned;
         player.Died += OnPlayerDied;
-        playerAreaManager.PlayerReachedLastArea += OnPlayerWon;
-        pickablesManager.ScoreChanged += OnScoreChanged;
+        checkpointManager.PlayerReachedLastArea += OnPlayerWon;
 
         //Set map limits
-        enemyManager.mapLimit = mapLimit * mapLimitEnemyMod;
         player.mapLimit = mapLimit;
-
-        //Select first spawn area
-        OnEnemySpawned();
 
         //Set Game Timer
         timer = maxPlayTime * 60;
-    }
-    private void Start()
-    {
+
         gameManager = GameManager.Get();
         gameManager.level = level;
     }
@@ -73,6 +65,11 @@ public class LevelManager : MonoBehaviour
     }
 
     //Methods
+    public void AddScore(int value)
+    {
+        gameManager.score += value;
+        ScoreUpdated.Invoke();
+    }
     void RespawnPlayer()
     {
         player.gameObject.SetActive(true);
@@ -80,16 +77,11 @@ public class LevelManager : MonoBehaviour
     }
 
     //Event Receivers
-    private void OnEnemySpawned()
-    {
-        //Send a random area (OPTIMICE LATER, USE PLAYER POSITION TO SELECT AREAS)
-        enemyManager.publicSpawnArea = Random.Range(0, spawnAreas);
-    }
     void OnPlayerDied()
     {
         player.gameObject.SetActive(false);
 
-        if (playerLives > 1)
+        if (gameManager.playerLives > 1)
         {
             //Respawn player
             gameManager.playerLives--;
@@ -98,7 +90,7 @@ public class LevelManager : MonoBehaviour
 
             //Set new player position
             Vector3 newSpawnPoint = player.transform.position;
-            newSpawnPoint.z = playerAreaManager.GetHighestAreaPosition();
+            newSpawnPoint.z = checkpointManager.GetHighestCheckpointPosition();
             player.transform.position = newSpawnPoint;
         }
         else
@@ -118,10 +110,5 @@ public class LevelManager : MonoBehaviour
         gameManager.score += gameManager.playerLives * lifeScoreValue;
         gameManager.level++;
         PlayerWon.Invoke();
-    }
-    void OnScoreChanged(int value)
-    {
-        gameManager.score += value;
-        ScoreUpdated.Invoke();
     }
 }

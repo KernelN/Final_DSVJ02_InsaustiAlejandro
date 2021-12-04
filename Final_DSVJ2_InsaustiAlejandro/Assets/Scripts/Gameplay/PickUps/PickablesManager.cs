@@ -1,14 +1,16 @@
-﻿using System;
-
-public class PickablesManager : MonoBehaviourSingletonInScene<PickablesManager>
+﻿public class PickablesManager : MonoBehaviourSingletonInScene<PickablesManager>
 {
-	public Action<int> ScoreChanged;
-	
-	//Unity Events
+    LevelManager levelManager;
 
-	//Methods
-	public void OnScorePickedUp(float value)
+    //Unity Events
+    private void Start()
     {
-		ScoreChanged.Invoke((int)value);
+        levelManager = LevelManager.Get();
+    }
+
+    //Methods
+    public void OnScorePickedUp(float value)
+    {
+		levelManager.AddScore((int)value);
     }
 }
