@@ -865,7 +865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff7ee097ce14d084585fa9fdaa7e2be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelManager: {fileID: 0}
+  levelManager: {fileID: 1650263847}
   victoryPanel: {fileID: 1817799028}
   defeatPanel: {fileID: 1567284976}
   pausePanel: {fileID: 409276031}
@@ -1499,7 +1499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1056ce2e46f697e49acfa38b1f5ee960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 5175755973830980704}
   checkpointTransforms:
   - {fileID: 1383154699}
   - {fileID: 1149200259}
@@ -2361,6 +2361,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7786177310025477843}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1650263847 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7899773768049535171, guid: 2d84803a1a4847149be9731cd077c74d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1663234638}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f0a722262d92974c9f83ded9806a60c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1658126561
 GameObject:
   m_ObjectHideFlags: 0
@@ -3001,89 +3013,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 303235985}
     m_Modifications:
-    - target: {fileID: 38119679, guid: 89e96d53d07bb324a84d07c75c8b7f6c, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91,
-        type: 2}
-    - target: {fileID: 38119679, guid: 89e96d53d07bb324a84d07c75c8b7f6c, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 374175463, guid: 89e96d53d07bb324a84d07c75c8b7f6c, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91,
-        type: 2}
-    - target: {fileID: 374175463, guid: 89e96d53d07bb324a84d07c75c8b7f6c, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4581168806921560600, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91,
-        type: 2}
-    - target: {fileID: 4581168806921560600, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4581168807605009967, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4581168807605009967, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4581168807605009967, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 303235986}
-    - target: {fileID: 4581168807605009967, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4581168807605009967, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 4581168807605009967, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 4581168808046792016, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 303235986}
-    - target: {fileID: 4581168808046792022, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_Name
-      value: Game Over - Button
-      objectReference: {fileID: 0}
-    - target: {fileID: 4581168808046792022, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4581168808534073816, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
         type: 3}
       propertyPath: m_Name
       value: Victory Panel
-      objectReference: {fileID: 0}
-    - target: {fileID: 4581168808534073816, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4581168808534073817, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
         type: 3}
@@ -3189,28 +3132,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4581168808963417913, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91,
-        type: 2}
-    - target: {fileID: 4581168808963417913, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4581168808984433411, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91,
-        type: 2}
-    - target: {fileID: 4581168808984433411, guid: 89e96d53d07bb324a84d07c75c8b7f6c,
-        type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89e96d53d07bb324a84d07c75c8b7f6c, type: 3}

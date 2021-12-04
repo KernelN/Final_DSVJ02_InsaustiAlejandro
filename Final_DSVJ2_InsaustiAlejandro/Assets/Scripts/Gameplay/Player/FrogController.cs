@@ -73,12 +73,15 @@ public class FrogController : MonoBehaviour, IHittable
         Quaternion newDirection = Quaternion.LookRotation(direction, transform.up);
         if (newDirection != directionRotation)
         {
-            StopCoroutine(rotationRoutine);
+            //Reset data
+            if (rotationRoutine != null) StopCoroutine(rotationRoutine);
             directionRotation = newDirection;
             rotationTimer = 0;
+
+            //Start new routine
+            rotationRoutine = Turn();
+            StartCoroutine(rotationRoutine);
         }
-        rotationRoutine = Turn();
-        StartCoroutine(rotationRoutine);
 
         //If movement is posible, move
         if (MovementBlocked(movement))
