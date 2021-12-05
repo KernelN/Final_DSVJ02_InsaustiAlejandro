@@ -43,8 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cd80d0bb08008c40a08469725ecac23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstTimeOnMenu: 1
   playerData:
+    name: 
     playerLives: 3
     score: 0
-    level: 0
+    level: 1
+  highscoreTable: []
   maxLevel: 5

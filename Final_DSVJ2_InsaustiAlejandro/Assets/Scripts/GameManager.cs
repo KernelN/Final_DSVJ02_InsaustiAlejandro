@@ -141,9 +141,14 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     }
     void ReceiveData()
     {
-        List<PlayerData> temp = new List<PlayerData>(1);
-        playerData = JsonFileManager<PlayerData>.LoadDataFromFile(temp[0], Application.persistentDataPath + "data.bin");
-        highscoreTable = JsonFileManager<List<PlayerData>>.LoadDataFromFile(temp, Application.persistentDataPath + "data.bin");
+        //Get player data
+        PlayerData temp = new PlayerData();
+        playerData = JsonFileManager<PlayerData>.LoadDataFromFile(temp, Application.persistentDataPath + "data.bin");
+        if (playerData.level < 1) playerData = templateData; //if there is no player, load template
+     
+        //Get Highscores
+        List<PlayerData> tempList = new List<PlayerData>();
+        highscoreTable = JsonFileManager<List<PlayerData>>.LoadDataFromFile(tempList, Application.persistentDataPath + "data.bin");
     }
     void SaveData()
     {
