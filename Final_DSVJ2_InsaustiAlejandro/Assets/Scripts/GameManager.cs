@@ -143,16 +143,16 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         //Get player data
         PlayerData temp = new PlayerData();
-        playerData = JsonFileManager<PlayerData>.LoadDataFromFile(temp, Application.persistentDataPath + "data.bin");
+        playerData = JsonFileManager<PlayerData>.LoadDataFromFile(temp, Application.persistentDataPath + "/data.bin");
         if (playerData.level < 1) playerData = templateData; //if there is no player, load template
      
         //Get Highscores
         List<PlayerData> tempList = new List<PlayerData>();
-        highscoreTable = JsonFileManager<List<PlayerData>>.LoadDataFromFile(tempList, Application.persistentDataPath + "data.bin");
+        highscoreTable = JsonFileManager<List<PlayerData>>.LoadDataFromFile(tempList, Application.persistentDataPath + "/highscores.bin");
     }
     void SaveData()
     {
-        JsonFileManager<PlayerData>.SaveDataToFile(playerData, Application.persistentDataPath + "data.bin");
-        JsonFileManager<List<PlayerData>>.SaveDataToFile(highscoreTable, Application.persistentDataPath + "data.bin");
+        JsonFileManager<PlayerData>.SaveDataToFile(playerData, Application.persistentDataPath + "/data.bin");
+        JsonFileManager<List<PlayerData>>.SaveDataToFile(highscoreTable, Application.persistentDataPath + "/highscores.bin");
     }
 }
