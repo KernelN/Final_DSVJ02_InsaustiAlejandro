@@ -56,7 +56,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     }
     public void DeleteScore()
     {
-        playerData = new PlayerData();
+        //playerData = new PlayerData();
+        playerData = templateData;
     }
     public void LoadMenu()
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 
 [Serializable]
-public class PlayerData
+public struct PlayerData
 {
     public string name;
     public int playerLives;
