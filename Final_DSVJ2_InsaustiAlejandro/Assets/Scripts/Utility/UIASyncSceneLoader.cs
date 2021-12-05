@@ -34,6 +34,9 @@ public class UIASyncSceneLoader : MonoBehaviour
             case SceneLoader.Scenes.menu:
                 sceneName = "Main Menu";
                 break;
+            case SceneLoader.Scenes.highscores:
+                sceneName = "Highscores";
+                break;
             case SceneLoader.Scenes.credits:
                 sceneName = "Credits";
                 break;
@@ -45,6 +48,12 @@ public class UIASyncSceneLoader : MonoBehaviour
                 break;
             case SceneLoader.Scenes.level3:
                 sceneName = "Level 3";
+                break;
+            case SceneLoader.Scenes.level4:
+                sceneName = "Level 4";
+                break;
+            case SceneLoader.Scenes.level5:
+                sceneName = "Level 5";
                 break;
             default:
                 break;
