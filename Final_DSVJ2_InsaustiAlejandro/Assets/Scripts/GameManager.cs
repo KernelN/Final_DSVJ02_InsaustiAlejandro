@@ -25,11 +25,14 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     [SerializeField] List<PlayerData> highscoreTable;
     [SerializeField] int maxLevel;
     SceneLoader.Scenes currentScene;
+    PlayerData templateData;
 
     //Unity Events
     private void Start()
     {
+        templateData = playerData;
         currentScene = SceneLoader.GetCurrentScene();
+        ReceiveData();
     }
     private void OnDestroy()
     {
@@ -133,6 +136,18 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     }
     public void QuitGame()
     {
+        SaveData();
         Application.Quit();
+    }
+    void ReceiveData()
+    {
+        List<PlayerData> temp = new List<PlayerData>(1);
+        playerData = JsonFileManager<PlayerData>.LoadDataFromFile(temp[0], Application.persistentDataPath + "data.bin");
+        highscoreTable = JsonFileManager<List<PlayerData>>.LoadDataFromFile(temp, Application.persistentDataPath + "data.bin");
+    }
+    void SaveData()
+    {
+        JsonFileManager<PlayerData>.SaveDataToFile(playerData, Application.persistentDataPath + "data.bin");
+        JsonFileManager<List<PlayerData>>.SaveDataToFile(highscoreTable, Application.persistentDataPath + "data.bin");
     }
 }
