@@ -3585,6 +3585,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Defeat Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 3935039794037439548, guid: 64c5cbbfe93644c419af67217d7b9e7d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5003452490472312049, guid: 64c5cbbfe93644c419af67217d7b9e7d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
