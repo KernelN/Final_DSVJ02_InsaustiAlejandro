@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
+    [Serializable]
+    class HighscoresTable { public List<PlayerData> table; }
+
     public int playerLives
     {
         get { return playerData.playerLives; }
@@ -18,11 +22,11 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         get { return playerData.level; }
         set { if (value < 1) value = 1; if (value > maxLevel) value = 1; playerData.level = value; }
     }
-    public List<PlayerData> highscores { get { return highscoreTable; } }
+    public List<PlayerData> highscores { get { return highscoreTable.table; } }
     public SceneLoader.Scenes targetScene { get { return currentScene; } }
     public bool firstTimeOnMenu = true;
     [SerializeField] PlayerData playerData;
-    [SerializeField] List<PlayerData> highscoreTable;
+    [SerializeField] HighscoresTable highscoreTable;
     [SerializeField] int maxLevel;
     SceneLoader.Scenes currentScene;
     PlayerData templateData;
@@ -50,13 +54,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     public void AddScoreToHighscore(string name)
     {
         playerData.name = name;
-        highscoreTable.Add(playerData);
-        highscoreTable.Sort(HighscoreSorter.Compare);
+        highscoreTable.table.Add(playerData);
+        highscoreTable.table.Sort(HighscoreSorter.Compare);
         DeleteScore();
     }
     public void DeleteScore()
     {
-        //playerData = new PlayerData();
         playerData = templateData;
     }
     public void LoadMenu()
@@ -148,12 +151,13 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         if (playerData.level < 1) playerData = templateData; //if there is no player, load template
      
         //Get Highscores
-        List<PlayerData> tempList = new List<PlayerData>();
-        highscoreTable = JsonFileManager<List<PlayerData>>.LoadDataFromFile(tempList, Application.persistentDataPath + "/highscores.bin");
+        HighscoresTable tempList = new HighscoresTable();
+        highscoreTable = JsonFileManager<HighscoresTable>.LoadDataFromFile(tempList, Application.persistentDataPath + "/highscores.bin");
+        if (highscoreTable == null) highscoreTable = new HighscoresTable();
     }
     void SaveData()
     {
         JsonFileManager<PlayerData>.SaveDataToFile(playerData, Application.persistentDataPath + "/data.bin");
-        JsonFileManager<List<PlayerData>>.SaveDataToFile(highscoreTable, Application.persistentDataPath + "/highscores.bin");
+        JsonFileManager<HighscoresTable>.SaveDataToFile(highscoreTable, Application.persistentDataPath + "/highscores.bin");
     }
 }

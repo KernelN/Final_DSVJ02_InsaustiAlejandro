@@ -78,7 +78,7 @@ public class LevelManager : MonoBehaviourSingletonInScene<LevelManager>
     }
     void TransferScore()
     {
-        gameManager.score += (int)(localScore * Time.deltaTime);
+        gameManager.score += (int)(localScore * Time.timeScale);
         localScore = 0;
     }
 
