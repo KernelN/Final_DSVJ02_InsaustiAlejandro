@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
-    public int playerLives 
+    public int playerLives
     {
         get { return playerData.playerLives; }
         set { if (value < 0) value = 0; playerData.playerLives = value; }
@@ -17,8 +18,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         get { return playerData.level; }
         set { if (value < 1) value = 1; if (value > maxLevel) value = 1; playerData.level = value; }
     }
-    public SceneLoader.Scenes targetScene { get { return currentScene; }  }
+    public List<PlayerData> highscores { get { return highscoreTable; } }
+    public SceneLoader.Scenes targetScene { get { return currentScene; } }
     [SerializeField] PlayerData playerData;
+    [SerializeField] List<PlayerData> highscoreTable;
     [SerializeField] int maxLevel;
     SceneLoader.Scenes currentScene;
 
@@ -39,6 +42,17 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     public void SetPause(float newTime)
     {
         Time.timeScale = newTime;
+    }
+    public void AddScoreToHighscore(string name)
+    {
+        playerData.name = name;
+        highscoreTable.Add(playerData);
+        highscoreTable.Sort(HighscoreSorter.Compare);
+        DeleteScore();
+    }
+    public void DeleteScore()
+    {
+        playerData = new PlayerData();
     }
     public void LoadMenu()
     {
@@ -104,6 +118,11 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
             default:
                 break;
         }
+    }
+    public void LoadHighscores()
+    {
+        currentScene = SceneLoader.Scenes.highscores;
+        SceneLoader.LoadScene(currentScene);
     }
     public void LoadCredits()
     {

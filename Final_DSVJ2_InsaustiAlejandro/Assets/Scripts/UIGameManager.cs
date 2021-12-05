@@ -37,6 +37,10 @@ public class UIGameManager : MonoBehaviour
     {
         gameManager.LoadLastLevel();
     }
+    public void LoadHighscores()
+    {
+        gameManager.LoadHighscores();
+    }
     public void LoadCredits()
     {
         gameManager.LoadCredits();

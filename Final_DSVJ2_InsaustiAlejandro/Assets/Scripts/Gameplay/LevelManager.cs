@@ -98,8 +98,9 @@ public class LevelManager : MonoBehaviourSingletonInScene<LevelManager>
             Debug.Log("Player Lost");
             gameOver = true;
             gameManager.level = 1;
+            //multiply score by current game speed
+            gameManager.score = (int)(gameManager.score * Time.deltaTime); 
             PlayerLost.Invoke();
-            gameManager.score = 0;
             gameManager.SetPause(0);
         }
     }
