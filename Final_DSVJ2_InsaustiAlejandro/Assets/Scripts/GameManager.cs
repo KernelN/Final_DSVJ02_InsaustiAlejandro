@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     }
     public List<PlayerData> highscores { get { return highscoreTable; } }
     public SceneLoader.Scenes targetScene { get { return currentScene; } }
+    public bool firstTimeOnMenu = true;
     [SerializeField] PlayerData playerData;
     [SerializeField] List<PlayerData> highscoreTable;
     [SerializeField] int maxLevel;
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
         currentScene = SceneLoader.Scenes.menu;
         SceneLoader.LoadScene(currentScene);
+        firstTimeOnMenu = false;
     }
     public void LoadLevel1()
     {

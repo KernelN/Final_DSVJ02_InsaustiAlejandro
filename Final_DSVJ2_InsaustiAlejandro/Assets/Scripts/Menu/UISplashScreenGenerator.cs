@@ -20,6 +20,8 @@ public class UISplashScreenGenerator : MonoBehaviour
     //Unity Events
     private void Start()
     {
+        if (GameManager.Get().firstTimeOnMenu) return; //only make splash screens on first load
+
         //Create black background
         blackScreen = InstantiateSplash();
 
