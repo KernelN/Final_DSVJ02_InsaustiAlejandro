@@ -11,6 +11,6 @@
     //Methods
     public void OnScorePickedUp(float value)
     {
-		levelManager.AddScore((int)value);
+        levelManager.score += (int)value;
     }
 }

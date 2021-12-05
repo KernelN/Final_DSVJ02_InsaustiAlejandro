@@ -14,6 +14,11 @@ public class LevelManager : MonoBehaviourSingletonInScene<LevelManager>
     public float playerRespawnTimer { get { return playerSpawnTimer; } }
     public float playerCurrentCheckpoint 
     { get { return checkpointManager.GetCurrentCheckpointPosition(); } }
+    public int score
+    { 
+        get { return localScore; }
+        set { localScore = value; if (localScore < 0) localScore = 0; ScoreUpdated.Invoke(); }
+    }
     //Enemies
     public int gameTimer { get { return (int)timer; } }
     [Header("Map")]
@@ -29,6 +34,7 @@ public class LevelManager : MonoBehaviourSingletonInScene<LevelManager>
     GameManager gameManager;
     bool gameOver;
     float timer;
+    int localScore;
 
     //Unity Events
     private void Start()
@@ -65,15 +71,15 @@ public class LevelManager : MonoBehaviourSingletonInScene<LevelManager>
     }
 
     //Methods
-    public void AddScore(int value)
-    {
-        gameManager.score += value;
-        ScoreUpdated.Invoke();
-    }
     void RespawnPlayer()
     {
         player.gameObject.SetActive(true);
         player.Respawn();
+    }
+    void TransferScore()
+    {
+        gameManager.score += (int)(localScore * Time.deltaTime);
+        localScore = 0;
     }
 
     //Event Receivers
@@ -99,7 +105,7 @@ public class LevelManager : MonoBehaviourSingletonInScene<LevelManager>
             gameOver = true;
             gameManager.level = 1;
             //multiply score by current game speed
-            gameManager.score = (int)(gameManager.score * Time.deltaTime); 
+            TransferScore();
             PlayerLost.Invoke();
             gameManager.SetPause(0);
         }
@@ -108,8 +114,9 @@ public class LevelManager : MonoBehaviourSingletonInScene<LevelManager>
     {
         Debug.Log("Player Won");
         gameOver = true;
-        gameManager.score += (int)(gameManager.score * (timer / (maxPlayTime*60)));
-        gameManager.score += gameManager.playerLives * lifeScoreValue;
+        localScore = (int)(localScore * (timer / (maxPlayTime * 60)));
+        localScore += gameManager.playerLives * lifeScoreValue;
+        TransferScore();
         gameManager.level++;
         PlayerWon.Invoke();
         gameManager.SetPause(0);

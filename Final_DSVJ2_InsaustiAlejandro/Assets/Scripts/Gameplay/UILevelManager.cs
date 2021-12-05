@@ -60,7 +60,7 @@ public class UILevelManager : MonoBehaviour
     }
     void SetScoreText(TextMeshProUGUI text)
     {
-        text.text = "Score: " + gameManager.score.ToString("D3");
+        text.text = "Score: " + (gameManager.score + levelManager.score).ToString("D3");
     }
     void FirstSet()
     {
